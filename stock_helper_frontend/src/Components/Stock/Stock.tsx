@@ -1,47 +1,37 @@
-import React, { useEffect } from "react";
-// import { useParams } from "react-router-dom";
-import { createChart, ColorType } from "lightweight-charts";
+import React, { useEffect, useRef, memo } from "react";
 
-const chartOptions = {
-  layout: {
-    textColor: "black",
-    background: { type: ColorType.Solid, color: "transparent" },
-  },
-};
-
-const data = [
-  { value: 0, time: "2022-01-17" },
-  { value: 8, time: "2022-01-18" },
-  { value: 10, time: "2022-01-19" },
-  { value: 20, time: "2022-01-20" },
-  { value: 3, time: "2022-01-21" },
-  { value: 43, time: "2022-01-22" },
-  { value: 41, time: "2022-01-23" },
-  { value: 43, time: "2022-01-24" },
-  { value: 56, time: "2022-01-25" },
-  { value: 46, time: "2022-01-26" },
-];
-
-const Stock: React.FC = () => {
-  // const { name } = useParams<{ name: string }>();
+function TradingViewWidget() {
+  const container = useRef();
+  const scriptAppended = useRef(false); // Tracks if the script is already added
 
   useEffect(() => {
-    const chartContainer = document.getElementById("chart");
-    if (!chartContainer) return;
+    if (scriptAppended.current) return; // Prevent duplicate script insertion
+    scriptAppended.current = true;
 
-    const chart = createChart(chartContainer, chartOptions);
-    const areaSeries = chart.addAreaSeries({
-      lineColor: "#2962FF",
-      topColor: "#2962FF",
-      bottomColor: "rgba(41, 98, 255, 0.28)",
-    });
-    areaSeries.setData(data);
-    chart.timeScale().fitContent();
-
-    return () => chart.remove(); // Cleanup on unmount
+    const script = document.createElement("script");
+    script.src =
+      "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
+    script.type = "text/javascript";
+    script.async = true;
+    script.innerHTML = `
+        {
+          "autosize": true,
+          "symbol": "NASDAQ:AAPL",
+          "interval": "D",
+          "timezone": "Etc/UTC",
+          "theme": "dark",
+          "style": "2",
+          "locale": "en",
+          "allow_symbol_change": true,
+          "save_image": false,
+          "calendar": false,
+          "hide_volume": true,
+          "support_host": "https://www.tradingview.com"
+        }`;
+    container.current.appendChild(script);
   }, []);
 
-  return <div id="chart" style={{ width: "100%", height: "1000px" }}></div>;
-};
+  return <div className=" w-full h-[800px]" ref={container}></div>;
+}
 
-export default Stock;
+export default memo(TradingViewWidget);

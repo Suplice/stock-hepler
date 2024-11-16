@@ -9,36 +9,6 @@ const stockData = [
     change: 1.5,
     percentChange: 1,
   },
-  {
-    name: "GOOGL",
-    price: 2500,
-    change: 2.5,
-    percentChange: 1,
-  },
-  {
-    name: "AMZN",
-    price: 3500,
-    change: 3.5,
-    percentChange: 1,
-  },
-  {
-    name: "TSLA",
-    price: 750,
-    change: 7.5,
-    percentChange: 1,
-  },
-  {
-    name: "MSFT",
-    price: 300,
-    change: 3,
-    percentChange: 1,
-  },
-  {
-    name: "FB",
-    price: 350,
-    change: 3.5,
-    percentChange: 1,
-  },
 ];
 
 const Main: React.FC = () => {
