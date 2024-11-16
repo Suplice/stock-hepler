@@ -1,6 +1,6 @@
 stock_helper_backend/.env
-stock_helper_backend/app/__pycache__/wsgi.cpython-313.pyc
-stock_helper_backend/app/__pycache__/urls.cpython-313.pyc
-stock_helper_backend/app/__pycache__/settings.cpython-313.pyc
-stock_helper_backend/app/__pycache__/__init__.cpython-313.pyc
+stock_helper_backend/stock_helper_backend/__pycache__/wsgi.cpython-313.pyc
+stock_helper_backend/stock_helper_backend/__pycache__/urls.cpython-313.pyc
+stock_helper_backend/stock_helper_backend/__pycache__/settings.cpython-313.pyc
+stock_helper_backend/stock_helper_backend/__pycache__/__init__.cpython-313.pyc
 stock_helper_frontend/src/styles.css
